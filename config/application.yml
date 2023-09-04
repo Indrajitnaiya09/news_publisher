@@ -1,0 +1,4 @@
+# config/application.yml
+
+third_party_api_1: 'http://localhost:4000/upcoming_gadgets'
+third_party_api_2: 'http://localhost:4000/upcoming_gadgets'

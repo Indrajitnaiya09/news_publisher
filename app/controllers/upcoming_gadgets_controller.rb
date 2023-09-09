@@ -32,6 +32,7 @@ class UpcomingGadgetsController < ApplicationController
         begin
           WebhookWorker.new.perform(endpoint, upcoming_gadget)
         rescue UpcomingGadgets::AuthorizationFailedError
+          return
         end
       end
     end

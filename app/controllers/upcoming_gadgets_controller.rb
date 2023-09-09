@@ -28,11 +28,11 @@ class UpcomingGadgetsController < ApplicationController
         ENV['third_party_api_2']
       ]
 
-      # based on action do something
-
       third_party_endpoints.each do |endpoint|
-        response = HTTParty.post(endpoint, :body =>  {"information"=> upcoming_gadget, "passcode" => 'ABCD@123'}.to_json , :headers => { 'Content-Type' => 'application/json' } )
-        #based on response something
+        begin
+          WebhookWorker.new.perform(endpoint, upcoming_gadget)
+        rescue UpcomingGadgets::AuthorizationFailedError
+        end
       end
     end
 
